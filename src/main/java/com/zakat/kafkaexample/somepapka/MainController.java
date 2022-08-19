@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class MainController {
@@ -19,6 +22,18 @@ private final ProducerService producerService;
     {
         this.producerService.send(TOPIC_NAME, message);
     }
+
+    @PostMapping(value = "/list")
+    public void sendStringListToKafkaTopic(@RequestParam("message") String message)
+    {
+        List<String> list = new ArrayList<>();
+        list.add(message);
+        list.add(message + " add");
+        list.add(message + " add 2");
+        this.producerService.sendList(TOPIC_NAME, list);
+    }
+
+
 
     @PostMapping(value = "/sendmsg")
     public void sendMessageObjectToKafkaTopic(@RequestBody Message obj)

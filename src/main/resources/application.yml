@@ -17,7 +17,7 @@ spring:
       bootstrap-servers: localhost:9092
       group-id: group-id
       #потребители начнут читать сообщения с самого раннего из доступных, когда для этого потребителя нет существующего смещения.
-      auto-offset-reset: earliest
+      auto-offset-reset: latest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     producer:
